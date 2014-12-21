@@ -1,0 +1,44 @@
+---
+title: "The dangers of R Squared by the Anscombe Quartet"
+author: "Ricardo Vladimiro"
+date: "20 December 2014"
+output:
+  slidy_presentation:
+    fig_height: 4
+    fig_width: 4
+---
+
+## The dangers of R Squared by the Anscombe Quartet
+
+This shiny app was created with the objective of showing why a statistician shouldn't use R Squared blindly but rather explore the dataset and use diagnostic plots to understand the quality of the fitted model.
+
+You can use the app at: https://vlad.shinyapps.io/r_squared_by_the_anscombe_quartet/
+
+## Comparing the first two datasets
+
+The first dataset shows a linear relationship between x and y. It's R Squared shows this relationship.
+
+```{r}
+summary(lm(y1 ~ x1, data = anscombe))$r.square
+```
+
+The second dataset does not have a linear relationshipt between x and y. However the R Squared is:
+
+```{r}
+summary(lm(y2 ~ x2, data = anscombe))$r.square
+```
+
+## Diagnostic Plots
+
+```{r}
+par(mfrow = c(2,2))
+plot(lm(y2 ~ x2, data = anscombe))
+```
+
+Diagnostic plots for the second dataset show the problem in the Residuals vs Fitted plot (upper left corner). The relationship between the two variables is not linear so the residuals are not normaly distributed.
+
+## The Shiny App
+
+The shiny app allows the visualisation of scatter and diagnostics plots of all 4 datasets and summary of the linear model fitted.
+
+I hope this app will help in a better understanding of diagnostic plots and summary of linear models.
